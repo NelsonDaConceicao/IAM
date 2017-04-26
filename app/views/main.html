@@ -1,0 +1,60 @@
+<div class="col-sm-12">
+  <fieldset class="col-sm-12">
+    <legend class="col-sm-12">Informations : </legend>
+      <div class="col-sm-12 form-group">
+        <label class="cols-sm-12 control-label" style="font-size:16px;">{{main.informations}}</label>
+      </div>
+  </fieldset>
+</div>
+
+<div class="col-sm-12">
+  <fieldset class="col-sm-8" ng-disabled="main.isDirectionValid">
+    <legend class="col-sm-12">Lignes et directions : (<a ng-click="main.resetAll()">Réinitialiser</a>)</legend>
+    <form id="formDirection" ng-submit="main.validateSearch(main.search)">
+      <div class="col-sm-8">
+        <div class="col-sm-6 form-group">
+          <label for="route" class="cols-sm-2 control-label">{{main.labels.route}} :</label>
+          <div class="cols-sm-12">
+            <div class="input-group">
+              <input type="text" name="route" size="25" class="form-control" id="route"  placeholder="{{main.labels.route}}" ng-model="main.search.route" value="22" disabled="true"/>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 form-group">
+          <label for="direction" class="cols-sm-2 control-label">{{main.labels.direction}} :</label>
+          <div class="cols-sm-12">
+            <div class="input-group">
+              <select ng-model="main.search.direction" class="form-control">
+                <option ng-repeat="direction in main.listDirections.directions" value="{{direction.dir}}">{{direction.dir}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 form-group">
+          <div class="col-xs-12 col-md-12 col-lg-12">
+            <input type="submit" value="{{main.labels.validate}}" class="btn btn-normal btn-md btn-block"/>
+          </div>
+        </div>
+      </div>
+    </form>
+  </fieldset>
+  <fieldset class="col-sm-4" ng-disabled="main.isSearchValid" ng-show="main.isDirectionValid">
+    <legend class="col-sm-12">Arrêts de bus</legend>
+    <form id="formStop" ng-submit="main.searchBus(main.search)">
+        <div class="col-sm-12 form-group">
+          <label for="stop" class="cols-sm-2 control-label">{{main.labels.stop}} :</label>
+          <div class="input-group">
+            <select class="form-control" ng-model="main.search.stop" id="stop">
+              <option ng-repeat="stop in main.listStops.stops" value="{{stop}}">{{stop.stpnm}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-12 form-group">
+          <div class="col-xs-12 col-md-12 col-lg-12">
+            <input type="submit" value="{{main.labels.search}}" class="btn btn-success btn-md btn-block"/>
+          </div>
+        </div>
+    </form>
+  </fieldset>
+</div>
+<div id="map"></div>
